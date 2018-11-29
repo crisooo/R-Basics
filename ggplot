@@ -1,0 +1,23 @@
+sites <- read.csv("https://git.io/v9XNs")
+str(sites)
+
+library(ggplot2)
+ggplot(sites, aes(x=height)) + 
+  geom_density(col="grey70", 
+               aes(fill=period, group=period), #group makes 2 lines, fill gives them colour
+               alpha=0.2) + #alpha is how translucid. <alpha <opaque 
+  facet_wrap(~period) + #one box for each period
+  scale_fill_manual(values=c("indianred2", "skyblue3")) + #change color
+  theme_bw() + theme(legend.position="none") #change theme
+
+
+ggplot(bothGroups_mobile, aes(x=gamesLaunched)) + 
+  geom_histogram(col="grey70", 
+                 binwidth = 1,
+                 aes(fill=group, #fill gives them colour
+                     group=group),#group makes 2 lines
+                 alpha=0.9) + #alpha is how translucid. <alpha <opaque
+  xlim(0,50) + #x-axis
+  facet_wrap(~group) + #one box for each period
+  scale_fill_manual(values=c("indianred2", "skyblue3")) + #change color 
+  theme_bw() + theme(legend.position="none") #change theme/background
