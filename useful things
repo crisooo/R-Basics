@@ -1,7 +1,9 @@
-#remove a variable that you no longer need
+# Remove a variable that you no longer need
 rm(variable)
 
-#text into columns - https://rdrr.io/cran/tidyr/man/separate.html
+# Text into columns - https://rdrr.io/cran/tidyr/man/separate.html
 separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE,
   convert = FALSE, extra = "warn", fill = "warn", ...)
   
+# NAs into 0s
+df[is.na(df)] <- 0  
