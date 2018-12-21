@@ -1,0 +1,7 @@
+#remove a variable that you no longer need
+rm(variable)
+
+#text into columns - https://rdrr.io/cran/tidyr/man/separate.html
+separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE,
+  convert = FALSE, extra = "warn", fill = "warn", ...)
+  
