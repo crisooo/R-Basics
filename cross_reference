@@ -1,0 +1,25 @@
+install.packages("tidyverse")
+library(tidyverse)
+
+setwd("H:/Documents/CG/Decision Science/clusters")
+clusters <- read_csv("clusters_adobe_output20180713.csv")
+adobe <- read_csv("ClusterCheck23Sep.csv")
+
+colnames(clusters) <- c("accountID", "gaming_cluster", "hr_cluster")
+colnames(adobe) <- c("accountID", "gaming_clusterAdobe", "hr_clusterAdobe", "visits", "gameLaunches")
+
+join <- left_join(adobe,clusters, by="accountID")
+
+crossReference <- join %>% 
+  mutate(crossReference = ifelse(gaming_cluster == gaming_clusterAdobe & hr_cluster == hr_clusterAdobe, "YES",
+                                 "NO"))
+
+
+summary <- crossReference %>% 
+  group_by(crossReference) %>% 
+  summarise(visits = sum(visits),
+            gameLaunches = sum(gameLaunches),
+            accounts = n_distinct(accountID))
+
+dontMatch <- crossReference %>% 
+  filter(crossReference == "NO")
