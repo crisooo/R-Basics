@@ -1,6 +1,9 @@
 sites <- read.csv("https://git.io/v9XNs")
 str(sites)
 
+
+# Density plot
+
 library(ggplot2)
 ggplot(sites, aes(x=height)) + 
   geom_density(col="grey70", 
@@ -10,6 +13,7 @@ ggplot(sites, aes(x=height)) +
   scale_fill_manual(values=c("indianred2", "skyblue3")) + #change color
   theme_bw() + theme(legend.position="none") #change theme
 
+# Histogram
 
 ggplot(bothGroups_mobile, aes(x=gamesLaunched)) + 
   geom_histogram(col="grey70", 
@@ -21,3 +25,7 @@ ggplot(bothGroups_mobile, aes(x=gamesLaunched)) +
   facet_wrap(~group) + #one box for each period
   scale_fill_manual(values=c("indianred2", "skyblue3")) + #change color 
   theme_bw() + theme(legend.position="none") #change theme/background
+
+# Line chart
+ggplot(df, aes(x=ActivityDt, y=launchToStake)) + 
+  geom_line()
