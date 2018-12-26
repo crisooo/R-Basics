@@ -5,7 +5,7 @@ rm(variable)
 separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE,
   convert = FALSE, extra = "warn", fill = "warn", ...)
   # e.g.
-adobe <- separate(adobe, dateT, c("ActivityDt", "ActivityHour"), sep = ", Hour", remove = TRUE)
+adobe <- separate(df, column, c("ActivityDt", "ActivityHour"), sep = ", Hour", remove = TRUE)
 
   
 ## NAs into 0s
@@ -13,6 +13,10 @@ df[is.na(df)] <- 0
 
 ## Parsing dates
 library(lubridate)
-parse_date_time(bi$ActivityDt, orders = "d%/%m/%Y")    
+parse_date_time(df$datecolumn, orders = "d%/%m/%Y")    
   # another option but it doesnt always work
-as.Date(bi$ActivityDt, format = "d%/%m/%Y")
+as.Date(df$datecolumn, format = "d%/%m/%Y")
+
+#Extract unique elements of a data frame
+
+as.data.frame(unique(df$column))
