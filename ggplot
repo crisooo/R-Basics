@@ -2,7 +2,7 @@ sites <- read.csv("https://git.io/v9XNs")
 str(sites)
 
 
-# Density plot
+# DENSITY PLOT
 
 library(ggplot2)
 ggplot(sites, aes(x=height)) + 
@@ -13,7 +13,23 @@ ggplot(sites, aes(x=height)) +
   scale_fill_manual(values=c("indianred2", "skyblue3")) + #change color
   theme_bw() + theme(legend.position="none") #change theme
 
-# Histogram
+# Density 2
+
+ggplot(beatles, 
+       aes(x=danceability, 
+           fill=album_name,
+           text = paste(album_name)))+ #shows album on hover of the line
+  geom_density(alpha=0.5,  #transparency
+               color=NA)+
+  scale_fill_manual(values=c(green, yellow, pink, blue))+ # colors. first create variable with colors
+  labs(x="Danceability", y="Density") +  #axes titles
+  guides(fill=guide_legend(title="Album"))+  #title of legend
+  theme_minimal()+
+  ggtitle("Distribution of Danceability Data") #graph title
+  
+  
+  
+# HISTOGRAM
 
 ggplot(bothGroups_mobile, aes(x=gamesLaunched)) + 
   geom_histogram(col="grey70", 
@@ -26,6 +42,84 @@ ggplot(bothGroups_mobile, aes(x=gamesLaunched)) +
   scale_fill_manual(values=c("indianred2", "skyblue3")) + #change color 
   theme_bw() + theme(legend.position="none") #change theme/background
 
-# Line chart
+
+
+# LINE CHART
+
 ggplot(df, aes(x=ActivityDt, y=launchToStake)) + 
   geom_line()
+
+
+
+# BAR CHARTS
+
+# There are two types of bar charts: geom_bar() and geom_col(). 
+# geom_bar() makes the height of the bar proportional to the number of cases in each group
+# geom_col() makes the heights of the bars using values in the data. 
+# geom_bar() uses stat_count() by default: it counts the number of cases at each x position. 
+# geom_col() uses stat_identity(): it leaves the data as is.
+
+
+
+g <- ggplot(extremo, 
+            aes(x= track_name,
+                y=danceability)) +
+  geom_col(alpha=0.5,
+           aes(fill=album_name))   # fill using a variable
+
+
+
+
+
+
+
+
+
+
+
+
+# Plotly + ggplotly
+# 1. create a ggplot. 
+
+viz <- ggplot(beatles, 
+              aes(x=danceability, 
+                  fill=album_name,
+                  text = paste(album_name)))+ #shows album on hover of the line
+  geom_density(alpha=0.5,  #transparency
+               color=NA)+
+               ....
+
+# 2. convert into plotly with ggplotly
+
+ggplotly(viz, tooltip=c("text"))
+
+
+
+
+# Range between something and dumbell
+# range between each album’s most and least danceable song.
+danceRange <- extremo %>%
+  group_by(album_name)%>%
+  mutate(max=max(danceability))%>%
+  mutate(min=min(danceability))%>%
+  select(album_name, max, min)%>%
+  unique()
+
+#  used plotly to make a dumbbell plot showing the range in danceability values for each playlist. 
+viz2 <- plot_ly(danceRange, color = I("gray80"),  
+                hoverinfo = 'text') %>%
+  add_segments(x = ~max, xend = ~min, y = ~album_name, yend = ~album_name, showlegend = FALSE) %>%
+  add_markers(x = ~max, y = ~album_name, name = "Maximum Danceability Value", color = I(pink), text=~paste('Max Danceability: ', max)) %>%
+  add_markers(x = ~min, y = ~album_name, name = "Minimum Danceability Value", color = I(blue), text=~paste('Min Danceability: ', min))%>%
+  layout(
+    title = "Album Danceability Range",
+    xaxis = list(title = "Danceability"),
+    yaxis= list(title=""))
+
+ggplotly(viz2)
+
+
+
+
+
+
