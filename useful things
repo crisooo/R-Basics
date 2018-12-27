@@ -1,6 +1,16 @@
 ## Remove a variable that you no longer need
 rm(variable)
 
+## Remove columns from df
+starwars %>% 
+  select(-name) %>%        # the range of columns from 'name' to 'mass'
+  select(-(name:mass)) %>%        # the range of columns from 'name' to 'mass'
+  select(-contains('color')) %>%  # any column name that contains 'color'
+  select(-starts_with('bi')) %>%  # any column name that starts with 'bi'
+  select(-ends_with('er')) %>%    # any column name that ends with 'er'
+  select(-matches('^f.+s$')) %>%  # any column name matching the regex pattern
+  select_if(~!is.list(.)) %>%     # not by column name but by data type
+
 ## Text into columns - https://rdrr.io/cran/tidyr/man/separate.html
 separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE,
   convert = FALSE, extra = "warn", fill = "warn", ...)
