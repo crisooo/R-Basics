@@ -44,3 +44,12 @@ firstDate <-  df %>%
 plotdata_abs <- gather(df, key = "key_column", value = "values_column")
 
 plotdata_abs <- gather(df, key = "key_column", value = "values_column" ,2:ncol(qpCohort.wide))
+
+
+# Column names
+  # Replace the "X" by "W"
+names(df) <- gsub(x = names(df), pattern = "\\X", replacement = "W")  
+
+
+# https://www.datacamp.com/community/tutorials/15-easy-solutions-data-frame-problems-r
+
