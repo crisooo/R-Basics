@@ -38,3 +38,9 @@ firstDate <-  df %>%
   arrange(date) %>%
   slice(1) %>% # takes the first occurrence if there is a tie
   ungroup()
+
+
+# Gather
+plotdata_abs <- gather(df, key = "key_column", value = "values_column")
+
+plotdata_abs <- gather(df, key = "key_column", value = "values_column" ,2:ncol(qpCohort.wide))
