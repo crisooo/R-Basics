@@ -11,6 +11,12 @@ starwars %>%
   select(-matches('^f.+s$')) %>%  # any column name matching the regex pattern
   select_if(~!is.list(.)) %>%     # not by column name but by data type
 
+## Add a column
+df$column <- "to-do"
+#or
+join <- join %>% 
+  mutate()
+
 ## Text into columns - https://rdrr.io/cran/tidyr/man/separate.html
 separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE,
   convert = FALSE, extra = "warn", fill = "warn", ...)
