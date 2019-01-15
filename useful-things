@@ -59,3 +59,15 @@ names(df) <- gsub(x = names(df), pattern = "\\X", replacement = "W")
 
 # https://www.datacamp.com/community/tutorials/15-easy-solutions-data-frame-problems-r
 
+
+## Count if. Counts visits, opens...
+
+df <- df %>% 
+  group_by(customerType) %>%
+  summarise(visits = sum(visits > 0),
+            opens = sum(opens > 0),
+            claims = sum(claims > 0),
+            lp2claim = claims/visits,
+            open2claim = claims/opens
+  )  
+
