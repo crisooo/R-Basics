@@ -86,3 +86,4 @@ metadata %>%
 
 ## Joining data frames
 left_join(df1, df2, by = ("date" = "Dates"))
+#If you want to join by 2, best is to change the names
