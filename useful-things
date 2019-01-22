@@ -74,3 +74,15 @@ df <- df %>%
             open2claim = claims/opens
   )  
 
+
+## Filter out NAs
+metadata %>%
+  mutate(genome_bp = genome_size *1e6) %>%
+  filter(!is.na(clade))
+  
+  
+## Column and row sums
+#https://stat.ethz.ch/R-manual/R-devel/library/base/html/colSums.html
+
+## Joining data frames
+left_join(df1, df2, by = ("date" = "Dates"))
