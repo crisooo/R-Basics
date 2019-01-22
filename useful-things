@@ -51,7 +51,9 @@ plotdata_abs <- gather(df, key = "key_column", value = "values_column")
 
 plotdata_abs <- gather(df, key = "key_column_title", value = "values_column_title", 2:ncol(df)) #gather columns from 2 till the end
 # you tell them what to name the key column and the column for the values and then which columns to pick
-
+#☺ e.g
+accessPoints <- access %>% 
+  gather(key = "accessPoints", value = "accessValues", 3:ncol(access))
 
 # Column names
   # Replace the "X" by "W"
