@@ -34,9 +34,12 @@ parse_date_time(df$datecolumn, orders = "d%/%m/%Y")
 as.Date(df$datecolumn, format = "d%/%m/%Y")
 
 #Extract unique elements of a data frame
-
 as.data.frame(unique(df$column))
 
+
+# Filter contains
+newdf <- df %>% 
+  filter(grepl('2019', nameOfColumn))
 
 # First occurence for a variable
 firstDate <-  df %>% 
