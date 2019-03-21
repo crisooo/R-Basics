@@ -10,6 +10,9 @@ starwars %>%
   select(-ends_with('er')) %>%    # any column name that ends with 'er'
   select(-matches('^f.+s$')) %>%  # any column name matching the regex pattern
   select_if(~!is.list(.)) %>%     # not by column name but by data type
+  
+  # select and name at the same time
+  select(CustomerAccountNumber =`Account Number`, NPSDate = Date)
 
 ## Add a column
 df$column <- "to-do"
