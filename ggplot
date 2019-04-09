@@ -48,6 +48,13 @@ ggplot(bothGroups_mobile, aes(x=gamesLaunched)) +
 
 ggplot(df, aes(x=ActivityDt, y=launchToStake)) + 
   geom_line()
+  
+
+ggplot(df, aes(x = ActivityDt)) + 
+  geom_line(aes(y = launchToStake), colour="blue") + 
+  geom_line(aes(y = visitToStake), colour = "red") + 
+  ylab(label="Volumes") + 
+  xlab("Dates")
 
 
 
