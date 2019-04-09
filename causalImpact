@@ -1,0 +1,36 @@
+install.packages("CausalImpact")
+install.packages("reshape")
+library(CausalImpact)
+library(tidyverse)
+library(reshape)
+
+dataCG <- read_csv("causalData2.csv", col_names = FALSE)  two columns of data
+
+
+# Plot to check visually
+# First column has the control, the other the data to analyse
+matplot(dataCG, type = "l")
+
+
+pre.period <- c(1, 106)
+post.period <- c(107, 151)
+
+impact <- CausalImpact(dataCG, pre.period, post.period)
+plot(impact)
+summary(impact)
+summary(impact, "report")
+
+
+
+
+########################
+# With Dates
+########################
+
+pre.period <- as.Date(c("2014-01-01", "2014-03-11"))
+post.period <- as.Date(c("2014-03-12", "2014-04-10"))
+
+impact <- CausalImpact(data, pre.period, post.period)
+plot(impact)
+summary(impact)
+summary(impact, "report")
